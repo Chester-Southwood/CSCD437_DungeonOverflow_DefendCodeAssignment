@@ -69,16 +69,32 @@ public class DefendCode {
 			
 			//Do RegEx to check for valid file path?
 			
-			File inFile = new File(kIn.hasNextLine());
+			inFile = new File(kIn.hasNextLine());
 		}
 		
 		return inFile;
 		
 	}
 	
-	private static void getOutputFile()
+	private static file getOutputFile()
 	{
+		Scanner kIn = new Scanner(System.in);
+		System.out.println("Input the output file name. Only alphabetic characters may be used. Only .txt files may be used. File must exist in same directory the program is in.");
 		
+		File outFile = new File(kIn.hasNextLine());
+		Pattern pat = Pattern.compile("^\\w+.txt$");
+		Matcher m = pat.matcher(outFile.getPath());
+		
+		while(!outFile.exists() && !m.matches())
+		{
+			System.out.println("File does not exist. Re-enter with a existing file. If no file exists please create one.");
+			
+			//Do RegEx to check for valid file path?
+			
+			outFile = new File(kIn.hasNextLine());
+		}
+		
+		return outFile;
 	}
 	
 	private static void writeName()
