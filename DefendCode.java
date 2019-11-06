@@ -38,7 +38,7 @@ public class DefendCode {
 		lName = kIn.nextLine();
 		
 		p = Pattern.compile("^[a-zA-Z]{1,50}$");
-		m = p.matcher(fName);
+		m = p.matcher(lName);
 		
 		while(!m.matches())
 		{
