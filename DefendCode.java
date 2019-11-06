@@ -18,6 +18,7 @@ public class DefendCode{
 	
 	public static void main(String[] args) throws Exception
 	{
+<<<<<<< HEAD
 		
 		createWriter(false);
 
@@ -27,6 +28,12 @@ public class DefendCode{
 		num2 = readInts(sc, "Please enter the 2nd number.");
 		inputFile = getInputFile();
 		writeAll(fName, lName, num1, num2, inputFile);
+=======
+		String fName = "";
+		String lName = "";
+		
+		readName(fName, lName);
+>>>>>>> 94f74d4aa3a27e5ba1510cb476910d294f9d65ce
 	}
 	
 	private static void readName()
@@ -36,26 +43,30 @@ public class DefendCode{
 		System.out.println("Input First Name with length of at most 20 characters and comprised of only upper or lower case alphabetic characters");
 		fName = kIn.nextLine();
 		
-		Pattern p = Pattern.compile("^[a-zA-Z]{1,20}$");
+		Pattern p = Pattern.compile("^[a-zA-Z]{1,50}$");
 		Matcher m = p.matcher(fName);
 		
 		//System.out.println(m.matches());
 		
 		while(!m.matches())
 		{
-			System.out.println("Input was invalid. You must have between 1 and 20 upper or lower case alphabetic characters for first name");
+			System.out.println("Input was invalid. You must have between 1 and 50 upper or lower case alphabetic characters for first name");
 			fName = kIn.nextLine();
 		}
 		
-		System.out.println("Input Last Name with length of at most 30 characters and comprised of only upper or lower case alphabetic characters");
+		System.out.println("Input Last Name with length of at most 50 characters and comprised of only upper or lower case alphabetic characters");
 		lName = kIn.nextLine();
 		
+<<<<<<< HEAD
 		p = Pattern.compile("^[a-zA-Z]{1,30}$");
+=======
+		p = Pattern.compile("^[a-zA-Z]{1,50}$");
+>>>>>>> 94f74d4aa3a27e5ba1510cb476910d294f9d65ce
 		m = p.matcher(lName);
 		
 		while(!m.matches())
 		{
-			System.out.println("Input was invalid. You must have between 1 and 30 upper or lower case alphabetic characters for last name");
+			System.out.println("Input was invalid. You must have between 1 and 50 upper or lower case alphabetic characters for last name");
 			lName = kIn.nextLine();
 		}
 		
@@ -195,7 +206,36 @@ public class DefendCode{
 		return outFile;
 	}
 	
+<<<<<<< HEAD
 	private static void createWriter(File file) throws Exception
+=======
+	private static void passWord()
+	{
+		Scanner kIn = new Scanner(System.in);
+		System.out.println("Enter Password, must be at least 1 character in length");
+		
+		String pw = kIn.nextLine();
+		
+		while(!(pw.length() >= 1))
+		{
+			System.out.println("Password too short, please reenter.");
+			pw = kIn.nextLine();
+		}
+		
+		System.out.println("Reenter Password to validate match.");
+		String pw2 = kIn.nextLine();
+		
+		while(!pw.equals(pw2))
+		{
+			System.out.println("Reenter Password to validate match.");
+			pw2 = kIn.nextLine();
+		}
+		
+		System.out.println("Password Valid, have a good day.");
+	}
+	
+	private static void writeName()
+>>>>>>> 94f74d4aa3a27e5ba1510cb476910d294f9d65ce
 	{
 		if(fw == null)
 		{
