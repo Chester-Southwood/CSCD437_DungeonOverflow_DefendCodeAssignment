@@ -14,7 +14,6 @@ public class DefendCode {
 		String lName = "";
 		
 		readName(fName, lName);
-		
 	}
 	
 	private static void readName(String fName, String lName)
