@@ -39,7 +39,7 @@ public class DefendCode{
 		Pattern p = Pattern.compile("^[a-zA-Z]{1,20}$");
 		Matcher m = p.matcher(fName);
 		
-		System.out.println(m.matches());
+		//System.out.println(m.matches());
 		
 		while(!m.matches())
 		{
