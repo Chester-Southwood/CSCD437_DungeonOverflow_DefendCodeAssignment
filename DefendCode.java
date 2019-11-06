@@ -4,17 +4,20 @@ import java.io.File;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.io.FileWriter;
 
 public class DefendCode {
-
+	private static FileWriter fw = null;
 	
 	public static void main(String[] args)
 	{
 		String fName = "";
 		String lName = "";
 		
+		createWriter();
+
 		readName(fName, lName);
-		
+		writeName(fName, lName);
 	}
 	
 	private static void readName(String fName, String lName)
@@ -39,7 +42,7 @@ public class DefendCode {
 		lName = kIn.nextLine();
 		
 		p = Pattern.compile("^[a-zA-Z]{1,30}$");
-		Matcher m = p.matcher(fName);
+		m = p.matcher(lName);
 		
 		while(!m.matches())
 		{
@@ -140,7 +143,7 @@ public class DefendCode {
 		return Integer.MIN_VALUE <= longSum && longSum <= Integer.MAX_VALUE;
 	}
 	
-	private static file getInputFile()
+	private static File getInputFile()
 	{
 		Scanner kIn = new Scanner(System.in);
 		System.out.println("Input the input file name. Only alphabetic characters may be used. Only .txt files may be used. File must exist in same directory the program is in.");
@@ -162,7 +165,7 @@ public class DefendCode {
 		
 	}
 	
-	private static file getOutputFile()
+	private static File getOutputFile()
 	{
 		Scanner kIn = new Scanner(System.in);
 		System.out.println("Input the output file name. Only alphabetic characters may be used. Only .txt files may be used. File must exist in same directory the program is in.");
@@ -183,18 +186,104 @@ public class DefendCode {
 		return outFile;
 	}
 	
-	private static void writeName()
+	private static void createWriter(File file)
 	{
-		
+		if(fw == null)
+		{
+			fw = new FileWriter(file);
+		}
+
+	}
+
+	private static void createWriter()
+	{
+		if(fw == null)
+		{
+			fw = new FileWriter(getOutputFile());
+		}
+	}
+
+	private static void createWriter(File file, boolean append)
+	{
+		fw = new FileWriter(file, append);
+	}
+
+	private static void createWriter(boolean append)
+	{
+		if(fw == null)
+		{
+			fw = new FileWriter(getOutputFile(), append);
+		}
+	}
+
+	private static void clearFile(File file)
+	{
+		createWriter(file, false);
+		System.out.println("File cleared.");
+	}
+
+	private static FileWriter getWriter()
+	{
+		if(fw == null) throw new Exception("FileWriter not initialized. Please use createWriter(file) first.");
+		return fw;
+	}
+
+	private static void closeWriter()
+	{
+		if(fw == null) throw new Exception("Cannot close a null object. Please use createWriter(file) first.");
+		fw.close();
+	}
+
+	private static void writeName(String fname, String lname)
+	{
+		FileWriter fileWriter = getWriter();
+		fileWriter.append(fname + " " + lname);
 	}
 	
-	private static void writeSum()
+	private static void writeSum(int num1, int num2)
 	{
-		
+		FileWriter fileWriter = getWriter();
+		if(canAdd(num1, num2))
+		{
+			int sum = num1 + num2;
+			fileWriter.append(sum + "");
+		}
+		else
+		{
+			throw new Exception("Can't add " + num1 + " and " + num2 + " without causing integer overflow.");
+		}
+	}
+
+	private static void writeProduct(int num1, int num2)
+	{
+		FileWriter fileWriter = getWriter();
+		if(canMultiply(num1, num2))
+		{
+			int product = num1 * num2;
+			fileWriter.append(product + "");
+		}
+		else
+		{
+			throw new Exception("Can't multiply " + num1 + " and " + num2 + " without causing integer overflow.");
+		}
 	}
 	
-	private static void writeContents()
+	private static void writeContents(File input)
 	{
-		
+		FileWriter fileWriter = getWriter();
+		Scanner sc = new Scanner(input);
+		while(sc.hasNextLine())
+		{
+			String line = sc.nextLine();
+			fileWriter.append(line);
+		}
+	}
+
+	private static void writeAll(String fname, String lname, int num1, int num2, File input)
+	{
+		writeName(fname, lname);
+		writeSum(num1, num2);
+		writeProduct(num1, num2);
+		writeContents(input);
 	}
 }
