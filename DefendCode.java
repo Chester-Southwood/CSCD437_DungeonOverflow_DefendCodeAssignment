@@ -49,9 +49,95 @@ public class DefendCode {
 		
 	}
 	
-	private static void readInts()
-	{
+	/*
+	 * Generic method used for getting valid int from user via passed in Scanner
+	 * and message for looping for prompt until a valid range for a int is entered
+	 * and then returned.
+	 * 
+	 * @param userScanner Scanner(System.in) for user input from terminal.
+	 * @param numMessage  String message to make method generic if needed.
+	 * 
+	 * @return     		  Int value that is in a valid range without overflow/underflow.
+	 */
+	public static int readInts(final Scanner userScanner, final String numMessage)
+	{		
+		boolean gotNum   = false;
+		int     numValue = -1;
 		
+		while(!gotNum)
+		{
+			System.out.println(numMessage);
+			try
+			{
+				numValue = userScanner.nextInt();
+				gotNum   = true;
+			}
+			catch(NumberFormatException e) //exception thrown if outOfRange or outOfFormat
+			{
+				System.out.println("Incorrect input!");
+				System.out.println(numMessage);
+			}
+			finally
+			{
+				userScanner.nextLine(); //clear buffer
+			}
+		}
+		
+		return numValue;
+	}
+   
+   	/*
+	 * Takes two int values and determines if the product is a valid int.
+	 * As long as the product is in range of int, it doesn't matter to keep
+	 * track of the sign change.
+	 * 
+	 * @param num1 Integer value used to determine product.
+	 * @param num2 Integer value used to determine product.
+	 * 
+	 * @return     Boolean value that tells if int product is possible with the
+	 * 			   two passed int values.
+	 */
+	public static boolean canMultiply(final int num1, final int num2)
+	{
+		boolean canAdd = true;
+		int     sum    = 0;
+		
+		int num1Copy   = num1;
+		int num2Copy   = num2;
+		
+		for(int i = 0; i < Math.abs(num1) && canAdd; i++)
+		{
+			if(canAdd(sum, num2Copy))
+			{
+				sum = num2Copy + sum;
+			}
+			else
+			{
+				canAdd = false;
+			}
+		}
+		
+		return canAdd;
+	}
+	
+	/*
+	 * Takes two int values and determines if the sum is a valid int.
+	 * A sum is determined if it's in range of Integer.MIN_VALUE and INTEGER.MAX_VALUE.
+	 * 
+	 * @param num1 Integer value used to determine if valid int sum.
+	 * @param num2 Integer value used to determine if valid int sum.
+	 * 
+	 * @return     Boolean value that tells if int sum is possible with the
+	 * 			   two passed int values.
+	 */
+	public static boolean canAdd(final int num1, final int num2)
+	{
+		final long longNum1 = (long) num1;
+		final long longNum2 = (long) num2;
+		
+		final long longSum  = longNum1 + longNum2;
+		
+		return Integer.MIN_VALUE <= longSum && longSum <= Integer.MAX_VALUE;
 	}
 	
 	private static file getInputFile()
