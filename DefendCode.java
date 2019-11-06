@@ -5,22 +5,31 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.io.FileWriter;
+import java.io.*;
 
-public class DefendCode {
+public class DefendCode{
 	private static FileWriter fw = null;
+	private static String fName = "";
+	private static String lName = "";
+	private static int num1 = 0;
+	private static int num2 = 0;
+	private static File inputFile = null;
+	private static final String END = "\r\n";
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws Exception
 	{
-		String fName = "";
-		String lName = "";
 		
-		createWriter();
+		createWriter(false);
 
-		readName(fName, lName);
-		writeName(fName, lName);
+		readName();
+		Scanner sc = new Scanner(System.in);
+		num1 = readInts(sc, "Please enter the 1st number.");
+		num2 = readInts(sc, "Please enter the 2nd number.");
+		inputFile = getInputFile();
+		writeAll(fName, lName, num1, num2, inputFile);
 	}
 	
-	private static void readName(String fName, String lName)
+	private static void readName()
 	{
 		Scanner kIn = new Scanner(System.in);
 		
@@ -148,7 +157,7 @@ public class DefendCode {
 		Scanner kIn = new Scanner(System.in);
 		System.out.println("Input the input file name. Only alphabetic characters may be used. Only .txt files may be used. File must exist in same directory the program is in.");
 		
-		File inFile = new File(kIn.hasNextLine());
+		File inFile = new File(kIn.nextLine());
 		Pattern pat = Pattern.compile("^\\w+.txt$");
 		Matcher m = pat.matcher(inFile.getPath());
 		
@@ -158,7 +167,7 @@ public class DefendCode {
 			
 			//Do RegEx to check for valid file path?
 			
-			inFile = new File(kIn.hasNextLine());
+			inFile = new File(kIn.nextLine());
 		}
 		
 		return inFile;
@@ -170,7 +179,7 @@ public class DefendCode {
 		Scanner kIn = new Scanner(System.in);
 		System.out.println("Input the output file name. Only alphabetic characters may be used. Only .txt files may be used. File must exist in same directory the program is in.");
 		
-		File outFile = new File(kIn.hasNextLine());
+		File outFile = new File(kIn.nextLine());
 		Pattern pat = Pattern.compile("^\\w+.txt$");
 		Matcher m = pat.matcher(outFile.getPath());
 		
@@ -180,13 +189,13 @@ public class DefendCode {
 			
 			//Do RegEx to check for valid file path?
 			
-			outFile = new File(kIn.hasNextLine());
+			outFile = new File(kIn.nextLine());
 		}
 		
 		return outFile;
 	}
 	
-	private static void createWriter(File file)
+	private static void createWriter(File file) throws Exception
 	{
 		if(fw == null)
 		{
@@ -195,7 +204,7 @@ public class DefendCode {
 
 	}
 
-	private static void createWriter()
+	private static void createWriter() throws Exception
 	{
 		if(fw == null)
 		{
@@ -203,12 +212,12 @@ public class DefendCode {
 		}
 	}
 
-	private static void createWriter(File file, boolean append)
+	private static void createWriter(File file, boolean append) throws Exception
 	{
 		fw = new FileWriter(file, append);
 	}
 
-	private static void createWriter(boolean append)
+	private static void createWriter(boolean append) throws Exception
 	{
 		if(fw == null)
 		{
@@ -216,37 +225,43 @@ public class DefendCode {
 		}
 	}
 
-	private static void clearFile(File file)
+	private static void clearFile(File file) throws Exception
 	{
 		createWriter(file, false);
 		System.out.println("File cleared.");
 	}
 
-	private static FileWriter getWriter()
+	private static FileWriter getWriter() throws Exception
 	{
 		if(fw == null) throw new Exception("FileWriter not initialized. Please use createWriter(file) first.");
 		return fw;
 	}
 
-	private static void closeWriter()
+	private static void closeWriter() throws Exception
 	{
 		if(fw == null) throw new Exception("Cannot close a null object. Please use createWriter(file) first.");
 		fw.close();
 	}
 
-	private static void writeName(String fname, String lname)
+	private static void writeName(String fname, String lname) throws Exception
 	{
 		FileWriter fileWriter = getWriter();
-		fileWriter.append(fname + " " + lname);
+		fileWriter.append(fname + " " + lname + END);
+		fileWriter.flush();
+		// PrintWriter pw =  new PrintWriter(new File("out.txt"));
+		// pw.append(fname + " " + lname);
+		// pw.flush();
+		// pw.close();
 	}
 	
-	private static void writeSum(int num1, int num2)
+	private static void writeSum(int num1, int num2) throws Exception
 	{
 		FileWriter fileWriter = getWriter();
 		if(canAdd(num1, num2))
 		{
 			int sum = num1 + num2;
-			fileWriter.append(sum + "");
+			fileWriter.append(sum + END);
+			fileWriter.flush();
 		}
 		else
 		{
@@ -254,13 +269,14 @@ public class DefendCode {
 		}
 	}
 
-	private static void writeProduct(int num1, int num2)
+	private static void writeProduct(int num1, int num2) throws Exception
 	{
 		FileWriter fileWriter = getWriter();
 		if(canMultiply(num1, num2))
 		{
 			int product = num1 * num2;
-			fileWriter.append(product + "");
+			fileWriter.append(product + END);
+			fileWriter.flush();
 		}
 		else
 		{
@@ -268,18 +284,19 @@ public class DefendCode {
 		}
 	}
 	
-	private static void writeContents(File input)
+	private static void writeContents(File input) throws FileNotFoundException, Exception
 	{
 		FileWriter fileWriter = getWriter();
 		Scanner sc = new Scanner(input);
 		while(sc.hasNextLine())
 		{
 			String line = sc.nextLine();
-			fileWriter.append(line);
+			fileWriter.append(line + END);
+			fileWriter.flush();
 		}
 	}
 
-	private static void writeAll(String fname, String lname, int num1, int num2, File input)
+	private static void writeAll(String fname, String lname, int num1, int num2, File input) throws Exception
 	{
 		writeName(fname, lname);
 		writeSum(num1, num2);
