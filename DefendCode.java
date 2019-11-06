@@ -38,7 +38,7 @@ public class DefendCode {
 		lName = kIn.nextLine();
 		
 		p = Pattern.compile("^[a-zA-Z]{1,50}$");
-		Matcher m = p.matcher(fName);
+		m = p.matcher(fName);
 		
 		while(!m.matches())
 		{
@@ -139,12 +139,12 @@ public class DefendCode {
 		return Integer.MIN_VALUE <= longSum && longSum <= Integer.MAX_VALUE;
 	}
 	
-	private static file getInputFile()
+	private static File getInputFile()
 	{
 		Scanner kIn = new Scanner(System.in);
 		System.out.println("Input the input file name. Only alphabetic characters may be used. Only .txt files may be used. File must exist in same directory the program is in.");
 		
-		File inFile = new File(kIn.hasNextLine());
+		File inFile = new File(kIn.nextLine());
 		Pattern pat = Pattern.compile("^\\w+.txt$");
 		Matcher m = pat.matcher(inFile.getPath());
 		
@@ -154,19 +154,19 @@ public class DefendCode {
 			
 			//Do RegEx to check for valid file path?
 			
-			inFile = new File(kIn.hasNextLine());
+			inFile = new File(kIn.nextLine());
 		}
 		
 		return inFile;
 		
 	}
 	
-	private static file getOutputFile()
+	private static File getOutputFile()
 	{
 		Scanner kIn = new Scanner(System.in);
 		System.out.println("Input the output file name. Only alphabetic characters may be used. Only .txt files may be used. File must exist in same directory the program is in.");
 		
-		File outFile = new File(kIn.hasNextLine());
+		File outFile = new File(kIn.nextLine());
 		Pattern pat = Pattern.compile("^\\w+.txt$");
 		Matcher m = pat.matcher(outFile.getPath());
 		
@@ -176,7 +176,7 @@ public class DefendCode {
 			
 			//Do RegEx to check for valid file path?
 			
-			outFile = new File(kIn.hasNextLine());
+			outFile = new File(kIn.nextLine());
 		}
 		
 		return outFile;
