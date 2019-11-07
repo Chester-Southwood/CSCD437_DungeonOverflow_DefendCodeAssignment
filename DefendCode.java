@@ -16,7 +16,6 @@ public class DefendCode{
 	
 	public static void main(String[] args) throws Exception
 	{
-		
 		createWriter(false);
 
 		readName();
