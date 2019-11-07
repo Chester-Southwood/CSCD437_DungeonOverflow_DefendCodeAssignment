@@ -16,10 +16,6 @@ public class DefendCode{
 	
 	public static void main(String[] args) throws Exception
 	{
-<<<<<<< HEAD
-=======
-		
->>>>>>> origin/DrewBranch
 		createWriter(false);
 
 		readName();
@@ -51,11 +47,7 @@ public class DefendCode{
 		System.out.println("Input Last Name with length of at most 50 characters and comprised of only upper or lower case alphabetic characters");
 		lName = kIn.nextLine();
 		
-<<<<<<< HEAD
 		p = Pattern.compile("^[a-zA-Z]{1,30}$");
-=======
-		p = Pattern.compile("^[a-zA-Z]{1,50}$");
->>>>>>> origin/DrewBranch
 		m = p.matcher(lName);
 		
 		while(!m.matches())
@@ -224,7 +216,6 @@ public class DefendCode{
 		
 		System.out.println("Password Valid, have a good day.");
 	}
-<<<<<<< HEAD
 
 	private static void createWriter(File file) throws Exception
 	{
@@ -234,8 +225,6 @@ public class DefendCode{
 		}
 
 	}
-=======
->>>>>>> origin/DrewBranch
 
 	private static void createWriter() throws Exception
 	{
