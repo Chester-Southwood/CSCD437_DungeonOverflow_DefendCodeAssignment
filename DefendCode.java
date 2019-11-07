@@ -194,6 +194,7 @@ public class DefendCode{
 		
 		return outFile;
 	}
+	
 	private static void passWord()
 	{
 		Scanner kIn = new Scanner(System.in);
@@ -217,15 +218,6 @@ public class DefendCode{
 		}
 		
 		System.out.println("Password Valid, have a good day.");
-	}
-	
-	private static void writeName()
-	{
-		if(fw == null)
-		{
-			fw = new FileWriter(file);
-		}
-
 	}
 
 	private static void createWriter() throws Exception
