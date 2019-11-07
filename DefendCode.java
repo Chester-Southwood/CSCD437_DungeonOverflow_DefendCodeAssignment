@@ -8,22 +8,11 @@ public class DefendCode {
 	
 	public static void main(String[] args)
 	{
-<<<<<<< Updated upstream
 		String fName = "";
 		String lName = "";
 		
 		readName(fName, lName);
 		
-=======
-		createWriter(false);
-
-		readName();
-		Scanner sc = new Scanner(System.in);
-		num1 = readInts(sc, "Please enter the 1st number.");
-		num2 = readInts(sc, "Please enter the 2nd number.");
-		inputFile = getInputFile();
-		writeAll(fName, lName, num1, num2, inputFile);
->>>>>>> Stashed changes
 	}
 	
 	private static void readName(String fName, String lName)
