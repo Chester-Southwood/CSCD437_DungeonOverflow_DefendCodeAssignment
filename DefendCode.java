@@ -18,7 +18,6 @@ public class DefendCode{
 	
 	public static void main(String[] args) throws Exception
 	{
-<<<<<<< HEAD
 		
 		createWriter(false);
 
@@ -28,12 +27,6 @@ public class DefendCode{
 		num2 = readInts(sc, "Please enter the 2nd number.");
 		inputFile = getInputFile();
 		writeAll(fName, lName, num1, num2, inputFile);
-=======
-		String fName = "";
-		String lName = "";
-		
-		readName(fName, lName);
->>>>>>> 94f74d4aa3a27e5ba1510cb476910d294f9d65ce
 	}
 	
 	private static void readName()
@@ -57,11 +50,7 @@ public class DefendCode{
 		System.out.println("Input Last Name with length of at most 50 characters and comprised of only upper or lower case alphabetic characters");
 		lName = kIn.nextLine();
 		
-<<<<<<< HEAD
 		p = Pattern.compile("^[a-zA-Z]{1,30}$");
-=======
-		p = Pattern.compile("^[a-zA-Z]{1,50}$");
->>>>>>> 94f74d4aa3a27e5ba1510cb476910d294f9d65ce
 		m = p.matcher(lName);
 		
 		while(!m.matches())
@@ -206,9 +195,6 @@ public class DefendCode{
 		return outFile;
 	}
 	
-<<<<<<< HEAD
-	private static void createWriter(File file) throws Exception
-=======
 	private static void passWord()
 	{
 		Scanner kIn = new Scanner(System.in);
@@ -233,9 +219,8 @@ public class DefendCode{
 		
 		System.out.println("Password Valid, have a good day.");
 	}
-	
-	private static void writeName()
->>>>>>> 94f74d4aa3a27e5ba1510cb476910d294f9d65ce
+
+	private static void createWriter(File file) throws Exception
 	{
 		if(fw == null)
 		{
