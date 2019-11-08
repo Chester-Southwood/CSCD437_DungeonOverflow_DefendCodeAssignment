@@ -98,7 +98,7 @@ int isCharANegative(char charValue)
  */
 int isInt(char* buf, int intDigitSize)
 {
-    //int isFlag = 0;
+    //int isFlag = 0; Commented out as not used.
     
     alternative_fgets(buf, intDigitSize + 1); //return is abitrary, userInput goes to passed in char* / arr
     
