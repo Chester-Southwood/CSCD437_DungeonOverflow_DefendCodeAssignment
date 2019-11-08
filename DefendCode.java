@@ -1,5 +1,3 @@
-package defendCode;
-
 import java.io.File;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -19,7 +17,6 @@ public class DefendCode{
 	
 	public static void main(String[] args) throws Exception
 	{
-		
 		createWriter(false);
 
 		readName();
@@ -52,7 +49,7 @@ public class DefendCode{
 		System.out.println("Input Last Name with length of at most 50 characters and comprised of only upper or lower case alphabetic characters");
 		lName = kIn.nextLine();
 		
-		p = Pattern.compile("^[a-zA-Z]{1,50}$");
+		p = Pattern.compile("^[a-zA-Z]{1,30}$");
 		m = p.matcher(lName);
 		
 		while(!m.matches())
@@ -220,6 +217,15 @@ public class DefendCode{
 		}
 		
 		System.out.println("Password Valid, have a good day.");
+	}
+
+	private static void createWriter(File file) throws Exception
+	{
+		if(fw == null)
+		{
+			fw = new FileWriter(file);
+		}
+
 	}
 
 	private static void createWriter() throws Exception
