@@ -83,57 +83,46 @@ int main(int argc, char* argv[])
 {
     char *finName = (char*) malloc(sizeof(char)*256);
     char *foutName = (char*) malloc(sizeof(char)*256);
+    FILE *fin = NULL;
+    FILE *fout = NULL;
+
+    char *fname;
+    char *lname;
+
+    printf("Enter first name: ");
+    fname = getName();
+    printf("Enter last name: ");
+    lname = getName();
+
+    do
+    {
+        printf(" \nAll Files must reside in local directory or sub-directory contained within local.\nPlease enter input file name.\n");
+        fin = getFile("r", finName);
+        while(fin == NULL)
+        {
+            fin = getFile("r", finName);
+        }
+
+        printf("Enter output file\n");
+        fout = getFile("w", foutName);
+        while(fin == NULL)
+        {
+            fout = getFile("w", finName);
+        }
+
+    if(isSameFile(finName, foutName) == 1)
+    {
+        printf("ERROR, input and output file cannot be of the same name. Re-enter file names.\n");
+    }
+
+    } while (isSameFile(finName, foutName) == 1);
     
-    char *t1 = "Test";
-    char *t2 = "Test";
-
-    int d = isSameFile(t1, t2);
-
-    printf("%d\n", d);
-
-    //FILE *fin = getFile("w", finName);
-    //FILE *fout = getFile("r", foutName);
-
-    //printf("fin: %s\n", finName);
-
-    //printf("fin: %s\nfout: %s\n", finName, foutName);
-
-    free(finName);
-    free(foutName);
-
-    /*
-    char *fName;
-    char *lName;
-    char *test = "TEST";
-
-    FILE *readFile = NULL;
-    FILE *writeFile = NULL;
-
     passwordThing();
 
-    printf("Enter first name. Length must not exceed 50 chars and may only contain alphabetic characters.\n");
-
-    do{
-        readFile = getFile("r");
-        writeFile = getFile("w");
-
-        while(readFile == NULL)
-        {
-            readFile = getFile("r");
-        }
-
-        while(writeFile == NULL)
-        {
-            writeFile = getFile("w");
-        }
-    } while(isSameFile(readFile, wroteFile) == 1)
-
-    while((c = fgetc(readFile)) != EOF)
-        printf("%c", c); 
-        
-    free(fName);
-    free(lName);
-
-    //fclose(readFile);
-    */
+    free(fname);
+    free(lname);
+    free(finName);
+    free(foutName);
+    fclose(fin);
+    fclose(fout);
 }
