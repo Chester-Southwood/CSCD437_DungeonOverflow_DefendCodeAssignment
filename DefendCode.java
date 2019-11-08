@@ -13,6 +13,7 @@ public class DefendCode{
 	private static String lName = "";
 	private static int num1 = 0;
 	private static int num2 = 0;
+	private static String pw = "";
 	private static File inputFile = null;
 	private static final String END = "\r\n";
 	
@@ -25,8 +26,9 @@ public class DefendCode{
 		Scanner sc = new Scanner(System.in);
 		num1 = readInts(sc, "Please enter the 1st number.");
 		num2 = readInts(sc, "Please enter the 2nd number.");
+		passWord();
 		inputFile = getInputFile();
-		writeAll(fName, lName, num1, num2, inputFile);
+		writeAll(fName, lName, num1, num2, pw, inputFile);
 	}
 	
 	private static void readName()
@@ -200,7 +202,7 @@ public class DefendCode{
 		Scanner kIn = new Scanner(System.in);
 		System.out.println("Enter Password, must be at least 1 character in length");
 		
-		String pw = kIn.nextLine();
+		pw = kIn.nextLine();
 		
 		while(!(pw.length() >= 1))
 		{
@@ -295,6 +297,17 @@ public class DefendCode{
 			throw new Exception("Can't multiply " + num1 + " and " + num2 + " without causing integer overflow.");
 		}
 	}
+
+	private static void writePassword(String password) throws Exception
+	{
+		if(password.length() > 0)
+		{
+			FileWriter fileWriter = getWriter();
+			fileWriter.append(password + END);
+			fileWriter.flush();
+		}
+
+	}
 	
 	private static void writeContents(File input) throws FileNotFoundException, Exception
 	{
@@ -308,11 +321,12 @@ public class DefendCode{
 		}
 	}
 
-	private static void writeAll(String fname, String lname, int num1, int num2, File input) throws Exception
+	private static void writeAll(String fname, String lname, int num1, int num2, String password, File input) throws Exception
 	{
 		writeName(fname, lname);
 		writeSum(num1, num2);
 		writeProduct(num1, num2);
+		writePassword(password);
 		writeContents(input);
 	}
 }
