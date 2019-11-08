@@ -12,6 +12,7 @@
  * @param  length the length of the given char array
  * @return        arbitrary int
  */
+
 int alternative_fgets(char* buf, int length)
 {
     int  index;
@@ -63,21 +64,6 @@ int canDoubleSumBeInt(double a, double b)
     return canDoubleBeInt(c);
 }
 
-
-/**
- * Given two double values, a int (1 = true, 0 = false) determining
- * if the product could be converted to a integer without conflicts.
- *
- * @param  a      first  double
- * @param  b      second double
- * @return        int (boolean) value that the two values can be multiplied
- */
-int canDoubleProductBeInt(double a, double b)
-{
-    double c = a * b;
-    return canDoubleBeInt(c);
-}
-
 /**
  * Given a double, the method returns a value that determines if the 
  * double can be converted to a integer without conflicts.
@@ -112,7 +98,7 @@ int isCharANegative(char charValue)
  */
 int isInt(char* buf, int intDigitSize)
 {
-    int isFlag = 0;
+    //int isFlag = 0;
     
     alternative_fgets(buf, intDigitSize + 1); //return is abitrary, userInput goes to passed in char* / arr
     
@@ -165,10 +151,11 @@ int promptAndGetInt()
     
     return promptedInt;
 }
-
+/*
 int main()
 {
     int promptedInt = promptAndGetInt();
     printf("%d",canDoubleProductBeInt(promptedInt, promptedInt));
     return 0;
 }
+*/
