@@ -13,20 +13,23 @@ public class DefendCode{
 	private static String lName = "";
 	private static int num1 = 0;
 	private static int num2 = 0;
+	private static String pw = "";
 	private static File inputFile = null;
+	private static File outputFile = null;
 	private static final String END = "\r\n";
 	
 	public static void main(String[] args) throws Exception
 	{
-		
-		createWriter(false);
+		outputFile = getOutputFile();
+		createWriter(outputFile, false);
 
 		readName();
 		Scanner sc = new Scanner(System.in);
 		num1 = readInts(sc, "Please enter the 1st number.");
 		num2 = readInts(sc, "Please enter the 2nd number.");
+		passWord();
 		inputFile = getInputFile();
-		writeAll(fName, lName, num1, num2, inputFile);
+		writeAll(fName, lName, num1, num2, pw, inputFile);
 	}
 	
 	private static void readName()
@@ -39,8 +42,6 @@ public class DefendCode{
 		Pattern p = Pattern.compile("^[a-zA-Z]{1,50}$");
 		Matcher m = p.matcher(fName);
 		
-		//System.out.println(m.matches());
-		
 		while(!m.matches())
 		{
 			System.out.println("Input was invalid. You must have between 1 and 50 upper or lower case alphabetic characters for first name");
@@ -50,7 +51,7 @@ public class DefendCode{
 		System.out.println("Input Last Name with length of at most 50 characters and comprised of only upper or lower case alphabetic characters");
 		lName = kIn.nextLine();
 		
-		p = Pattern.compile("^[a-zA-Z]{1,30}$");
+		p = Pattern.compile("^[a-zA-Z]{1,50}$");
 		m = p.matcher(lName);
 		
 		while(!m.matches())
@@ -161,6 +162,7 @@ public class DefendCode{
 		Pattern pat = Pattern.compile("^\\w+.txt$");
 		Matcher m = pat.matcher(inFile.getPath());
 		
+		
 		while(!inFile.exists() && !m.matches())
 		{
 			System.out.println("File does not exist. Re-enter with a existing file. If no file exists please create one.");
@@ -169,9 +171,7 @@ public class DefendCode{
 			
 			inFile = new File(kIn.nextLine());
 		}
-		
 		return inFile;
-		
 	}
 	
 	private static File getOutputFile()
@@ -183,6 +183,7 @@ public class DefendCode{
 		Pattern pat = Pattern.compile("^\\w+.txt$");
 		Matcher m = pat.matcher(outFile.getPath());
 		
+		System.out.println(outFile.getAbsolutePath());
 		while(!outFile.exists() && !m.matches())
 		{
 			System.out.println("File does not exist. Re-enter with a existing file. If no file exists please create one.");
@@ -191,7 +192,7 @@ public class DefendCode{
 			
 			outFile = new File(kIn.nextLine());
 		}
-		
+
 		return outFile;
 	}
 	
@@ -201,7 +202,30 @@ public class DefendCode{
 		{
 			fw = new FileWriter(file);
 		}
-
+	}
+	private static void passWord()
+	{
+		Scanner kIn = new Scanner(System.in);
+		System.out.println("Enter Password, must be at least 1 character in length");
+		
+		pw = kIn.nextLine();
+		
+		while(!(pw.length() >= 1))
+		{
+			System.out.println("Password too short, please reenter.");
+			pw = kIn.nextLine();
+		}
+		
+		System.out.println("Reenter Password to validate match.");
+		String pw2 = kIn.nextLine();
+		
+		while(!pw.equals(pw2))
+		{
+			System.out.println("Reenter Password to validate match.");
+			pw2 = kIn.nextLine();
+		}
+		
+		System.out.println("Password Valid, have a good day.");
 	}
 
 	private static void createWriter() throws Exception
@@ -248,10 +272,6 @@ public class DefendCode{
 		FileWriter fileWriter = getWriter();
 		fileWriter.append(fname + " " + lname + END);
 		fileWriter.flush();
-		// PrintWriter pw =  new PrintWriter(new File("out.txt"));
-		// pw.append(fname + " " + lname);
-		// pw.flush();
-		// pw.close();
 	}
 	
 	private static void writeSum(int num1, int num2) throws Exception
@@ -283,11 +303,26 @@ public class DefendCode{
 			throw new Exception("Can't multiply " + num1 + " and " + num2 + " without causing integer overflow.");
 		}
 	}
+
+	private static void writePassword(String password) throws Exception
+	{
+		if(password.length() > 0)
+		{
+			FileWriter fileWriter = getWriter();
+			fileWriter.append(password + END);
+			fileWriter.flush();
+		}
+
+	}
 	
 	private static void writeContents(File input) throws FileNotFoundException, Exception
 	{
 		FileWriter fileWriter = getWriter();
 		Scanner sc = new Scanner(input);
+		if(input.getAbsolutePath().equalsIgnoreCase(outputFile.getAbsolutePath().toLowerCase()))
+		{
+			throw new Exception("Output file and input files are the same.");
+		}
 		while(sc.hasNextLine())
 		{
 			String line = sc.nextLine();
@@ -296,11 +331,12 @@ public class DefendCode{
 		}
 	}
 
-	private static void writeAll(String fname, String lname, int num1, int num2, File input) throws Exception
+	private static void writeAll(String fname, String lname, int num1, int num2, String password, File input) throws Exception
 	{
 		writeName(fname, lname);
 		writeSum(num1, num2);
 		writeProduct(num1, num2);
+		writePassword(password);
 		writeContents(input);
 	}
 }
