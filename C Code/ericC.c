@@ -78,7 +78,7 @@ void passwordThing()
     }
     printf("Passwords match.\n");
 }
-
+/*
 int main(int argc, char* argv[])
 {
     char *finName = (char*) malloc(sizeof(char)*256);
@@ -125,4 +125,4 @@ int main(int argc, char* argv[])
     free(foutName);
     fclose(fin);
     fclose(fout);
-}
+} */
