@@ -37,7 +37,6 @@ void writeChar(FILE *out, char *arr)
     {
         fputc(arr[i], out);
     }
-    fputc('\n', out);
 }
 
 void writeInt(FILE *out, int *num)

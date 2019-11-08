@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include "defendCode.h"
 
 /**
  * Populates given char array with input given from the user.

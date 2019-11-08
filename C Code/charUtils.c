@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "defendCode.h"
 
 char* getName()
 {
@@ -61,20 +62,21 @@ int isSameFile(char *file1Name, char *file2Name)
     }
 }
 
-void passwordThing()
+void validatePassword()
 {
     char p1[51];
     char p2[51];
 
     fgets(p1, 51, stdin);
+    printf("Please enter it again to validate it: ");
     fgets(p2, 51, stdin);
 
     //printf("%s = %s", p1, p2);
 
     while(strncmp(p1, p2, 51) != 0)
     {
-        fgets(p2, 51, stdin);
         printf("Password does not match. Re-enenter matching password.\n");
+        fgets(p2, 51, stdin);
     }
     printf("Passwords match.\n");
 }

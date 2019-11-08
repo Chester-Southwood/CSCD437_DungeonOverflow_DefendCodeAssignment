@@ -1,9 +1,0 @@
-drew
-43
-passWord
-Testing
-All
-Input in this
-
-
-file
