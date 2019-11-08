@@ -5,13 +5,13 @@
 
 char* getName()
 {
-    char *name = (char*) malloc(sizeof(char)*51);
-    fgets(name, 51, stdin);
+    char *name = (char*) malloc(sizeof(char)*50);
+    fgets(name, 50, stdin);
 
     while(strlen(name) == 0)
     {
         printf("Name must be at least 1 char in length. Please re-enter name.");
-        fgets(name, 51, stdin);
+        fgets(name, 50, stdin);
     }
 
     //printf("%s in getName()\n", name);
@@ -23,7 +23,6 @@ FILE* getFile(char *accessType, char *fileName)
 {
     char path[256];
     getcwd(path, sizeof(path));
-    int nameSize = (256 - (strlen(path))) - 1;
 
     printf("0.) PATH: %s\n", path);
 
@@ -41,7 +40,7 @@ FILE* getFile(char *accessType, char *fileName)
 
     FILE *f = fopen(path, accessType);
 
-    while(f == NULL)
+    if(f == NULL)
     {
         printf("FILE DOES NOT EXIST. RETRY WITH VALID FILE\n");
         return NULL;
@@ -60,8 +59,8 @@ int isSameFile(char *file1Name, char *file2Name)
     {
         return 0;
     }
-    
 }
+
 void passwordThing()
 {
     char p1[51];
@@ -83,7 +82,7 @@ void passwordThing()
 int main(int argc, char* argv[])
 {
     char *finName = (char*) malloc(sizeof(char)*256);
-    char *foutName = (char*) malloc(sizeof(char)*256);;
+    char *foutName = (char*) malloc(sizeof(char)*256);
     
     char *t1 = "Test";
     char *t2 = "Test";
@@ -107,16 +106,27 @@ int main(int argc, char* argv[])
     char *lName;
     char *test = "TEST";
 
+    FILE *readFile = NULL;
+    FILE *writeFile = NULL;
+
     passwordThing();
 
     printf("Enter first name. Length must not exceed 50 chars and may only contain alphabetic characters.\n");
-    
-    FILE *readFile = getFile("r");
 
-    while(readFile == NULL)
-    {
+    do{
         readFile = getFile("r");
-    }
+        writeFile = getFile("w");
+
+        while(readFile == NULL)
+        {
+            readFile = getFile("r");
+        }
+
+        while(writeFile == NULL)
+        {
+            writeFile = getFile("w");
+        }
+    } while(isSameFile(readFile, wroteFile) == 1)
 
     while((c = fgetc(readFile)) != EOF)
         printf("%c", c); 
