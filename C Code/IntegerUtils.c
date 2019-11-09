@@ -3,6 +3,19 @@
 #include <limits.h>
 #include "defendCode.h"
 
+//We kept this file around in case we'd need it, but it is in fact defunct.
+//The file you are looking for that we use is called 'intUtils.c'
+
+/*
+ Team name - Dungeon Overflow
+
+Team Member 1: Drew Bosco
+
+Team Member 2: Eric Shervey
+
+Team Member 3: Chester Southwood 
+*/
+
 /**
  * Populates given char array with input given from the user.
  * The method will only take in enough chars for the array and

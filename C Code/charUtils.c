@@ -4,6 +4,16 @@
 #include <unistd.h>
 #include "defendCode.h"
 
+/*
+ Team name - Dungeon Overflow
+
+Team Member 1: Drew Bosco
+
+Team Member 2: Eric Shervey
+
+Team Member 3: Chester Southwood 
+*/
+
 char* getName()
 {
     char *name = (char*) malloc(sizeof(char)*50);

@@ -1,5 +1,15 @@
 #include "defendCode.h"
 
+/*
+ Team name - Dungeon Overflow
+
+Team Member 1: Drew Bosco
+
+Team Member 2: Eric Shervey
+
+Team Member 3: Chester Southwood 
+*/
+
 int main()
 {
     FILE *fout = NULL;

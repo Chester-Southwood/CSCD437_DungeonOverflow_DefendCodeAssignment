@@ -1,5 +1,15 @@
 #include "defendCode.h"
 
+/*
+ Team name - Dungeon Overflow
+
+Team Member 1: Drew Bosco
+
+Team Member 2: Eric Shervey
+
+Team Member 3: Chester Southwood 
+*/
+
 //will return 1 if it will not overflow
 //returns 0 if it will overflow
 int intOverflow(double dnum)

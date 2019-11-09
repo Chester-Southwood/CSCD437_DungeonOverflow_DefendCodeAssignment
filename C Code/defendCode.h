@@ -5,6 +5,16 @@
 #include <unistd.h>
 #include <ctype.h>
 
+/*
+ Team name - Dungeon Overflow
+
+Team Member 1: Drew Bosco
+
+Team Member 2: Eric Shervey
+
+Team Member 3: Chester Southwood 
+*/
+
 extern void writeChar(FILE *out, char *arr);
 
 extern void writeInt(FILE *out, int *num);

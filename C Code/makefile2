@@ -1,2 +1,0 @@
-driver : driver.c writeUtils.c
-	gcc -o driver -pedantic -Wall -Wextra -Werror  testMain.c drew.c -I.

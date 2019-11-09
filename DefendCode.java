@@ -6,6 +6,16 @@ import java.util.regex.Pattern;
 import java.io.FileWriter;
 import java.io.*;
 
+/*
+ Team name - Dungeon Overflow
+
+Team Member 1: Drew Bosco
+
+Team Member 2: Eric Shervey
+
+Team Member 3: Chester Southwood 
+*/
+
 public class DefendCode{
 	private static FileWriter fw = null;
 	private static String fName = "";
