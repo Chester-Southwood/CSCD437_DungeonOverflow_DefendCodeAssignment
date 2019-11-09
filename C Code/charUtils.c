@@ -8,13 +8,14 @@ char* getName()
 {
     char *name = (char*) malloc(sizeof(char)*50);
     fgets(name, 50, stdin);
-
-    while(strlen(name) == 0)
+    fflush(stdin);
+    while(strlen(name) <= 1 || name[0] == ' ')
     {
-        printf("Name must be at least 1 char in length. Please re-enter name.");
+        printf("Name must be at least 1 char in length. Please re-enter name.\n");
         fgets(name, 50, stdin);
+        fflush(stdin);
     }
-
+    if(name[strlen(name) -1] != '\n'  ) name[strlen(name)-1] = '\n';
     //printf("%s in getName()\n", name);
 
     return name;
@@ -25,7 +26,7 @@ FILE* getFile(char *accessType, char *fileName)
     char path[256];
     getcwd(path, sizeof(path));
 
-    printf("0.) PATH: %s\n", path);
+    //printf("0.) PATH: %s\n", path);
 
 
     fscanf(stdin, "%255s", fileName); //breaking here.
@@ -69,6 +70,7 @@ void validatePassword()
 
     fgets(p1, 51, stdin);
     printf("Please enter it again to validate it: ");
+    fflush(stdin);
     fgets(p2, 51, stdin);
 
     //printf("%s = %s", p1, p2);

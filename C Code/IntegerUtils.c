@@ -100,14 +100,12 @@ int isCharANegative(char charValue)
 int isInt(char* buf, int intDigitSize)
 {
     //int isFlag = 0; Commented out as not used.
-    
     alternative_fgets(buf, intDigitSize + 1); //return is abitrary, userInput goes to passed in char* / arr
     
     if(isdigit(buf[0]) || isCharANegative(buf[0]))
     {
         int index;
-        
-        for(index = 1; index <= intDigitSize; index++)
+        for(index = 1; index < intDigitSize; index++)
         {
             if(!isdigit(buf[index]) && buf[index] != '\n' && buf[index] != '\0')
             {
@@ -116,7 +114,6 @@ int isInt(char* buf, int intDigitSize)
         }
         
         double possibleInt = atof(buf);
-        
         return (canDoubleBeInt(possibleInt) && buf[intDigitSize - 1] == '\0' && buf[index - 2] != '\n') ? 1 : 0;
     }
     return -1;

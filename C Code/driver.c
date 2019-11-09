@@ -8,8 +8,11 @@ int main()
     char *foutName = (char*) malloc(sizeof(char)*256); 
     char* fname;
     char* lname;
-    int num1;
-    int num2;
+    int num1 = 0;
+    int num2 = 0;
+
+    double dnum1, dnum2;
+    int overflowFlag = 0;
 
     do {
         printf(" \nAll Files must reside in local directory or sub-directory contained within local.\nPlease enter input file name.\n");
@@ -34,40 +37,43 @@ int main()
     } while (isSameFile(finName, foutName) == 1);
 
 
-
-
     printf("Please enter your first name: ");
     fname = getName();
     printf("Please enter your last name: ");
     lname = getName();
 
+    do{
+        if(overflowFlag == 1)
+        {
+            printf("Invalid. Please try again.\n");
+        }
+        dnum1 = getNum("1st");
+        dnum2 = getNum("2nd");
+        overflowFlag = 1;
+    } while(canAdd(dnum1, dnum2) == 1 || canMultiply(dnum1,dnum2) == 1);
+    num1 = dnum1;
+    num2 = dnum2;
+    int sum = num1+num2;
+    int product = num1*num2;
+
     printf("Please enter a password: ");
+    fflush(stdin);
     validatePassword();
 
+    //Write to output file
     writeChar(fout, fname);
     writeChar(fout, lname);
+    writeInt(fout, &sum);
+    writeInt(fout, &product);
     writeContents(fout, fin);
 
-    return 1;
-    printf("Please enter 1st number: ");
-    num1 = promptAndGetInt();
+    free(fname);
+    free(lname);
+    free(finName);
+    free(foutName);
+    fclose(fin);
+    fclose(fout);
 
-    printf("Please enter 2nd number: ");
-    num2 = promptAndGetInt();
-
-    writeChar(fout, fname);
-    writeChar(fout, lname);
-    if(canDoubleSumBeInt((double)num1, (double)num2) == 1)
-    {
-        int sum = num1+num2;
-        writeInt(fout, &sum);
-    }
-    if(canDoubleProductBeInt((double)num1, (double)num2) == 1)
-    {
-        int product = num1*num2;
-        writeInt(fout, &product);
-    }
-
-    printf("Done");
+    printf("\nDone");
     return 1;
 }

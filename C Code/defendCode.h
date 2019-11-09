@@ -33,3 +33,10 @@ extern int isInt(char* buf, int intDigitSize);
 
 extern int promptAndGetInt();
 
+extern int intOverflow(double dnum);
+
+extern int canAdd(double dnum1, double dnum2);
+
+extern int canMultiply(double dnum1, double dnum2);
+
+extern double getNum(char * num);
