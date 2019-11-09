@@ -73,4 +73,3 @@ Team Member 3: Chester Southwood
 - User is required to save input file and output file within the source directory, they are unable to specify a outside location due to possible malicious behavior. 
 - Output file will be created automatically if not already located.
 - Decimal values could be entered, they are promptly converted and tested as integers.
-

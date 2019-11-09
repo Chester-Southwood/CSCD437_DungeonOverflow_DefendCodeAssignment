@@ -1,0 +1,129 @@
+terminal output:
+
+c code run with valid inputs:
+
+All Files must reside in local directory or sub-directory contained within local.
+Please enter input file name.
+in.txt
+Enter output file
+out.txt
+Please enter your first name: drew
+Please enter your last name: bosco
+Please enter 1st number: 3
+Please enter 2nd number: 2
+Please enter a password: pass
+Please enter it again to validate it: pass
+Passwords match.
+
+c code run with invalid entries:
+
+All Files must reside in local directory or sub-directory contained within local.
+Please enter input file name.
+out.txt
+Enter output file
+out.txt
+ERROR, input and output file cannot be of the same name. Re-enter file names.
+
+All Files must reside in local directory or sub-directory contained within local.
+Please enter input file name.
+innnn.txt
+FILE DOES NOT EXIST. RETRY WITH VALID FILE
+in.txt
+Enter output file
+outttt.txt
+Please enter your first name:
+Name must be at least 1 char in length. Please re-enter name.
+ drew
+Name must be at least 1 char in length. Please re-enter name.
+drew
+Please enter your last name:
+Name must be at least 1 char in length. Please re-enter name.
+ bosco
+Name must be at least 1 char in length. Please re-enter name.
+bosco
+Please enter 1st number: 13981294892
+Please enter 1st number: 832981924891
+Please enter 1st number: -192891284913589
+Please enter 1st number: 123
+Please enter 2nd number: 19843901u309
+Invalid. Please try again.
+Please enter 1st number: lsdf
+Please enter 1st number: 123
+Please enter 2nd number: 1234
+Please enter a password: pass
+Please enter it again to validate it: pls
+Password does not match. Re-enenter matching password.
+pass
+Passwords match.
+
+Done
+
+Java code output with valid input:
+
+Input the output file name. Only alphabetic characters may be used. Only .txt files may be used. File must exist in same directory the program is in.
+out.txt
+Input First Name with length of at most 50 characters and comprised of only upper or lower case alphabetic characters
+drew
+Input Last Name with length of at most 50 characters and comprised of only upper or lower case alphabetic characters
+bosco
+Please enter the 1st number.
+1
+Please enter the 2nd number.
+2
+Enter Password, must be at least 1 character in length
+pass
+Reenter Password to validate match.
+pass
+Password Valid, have a good day.
+Input the input file name. Only alphabetic characters may be used. Only .txt files may be used. File must exist in same directory
+the program is in.
+in.txt
+
+Java code output with invalid input:
+
+Input the output file name. Only alphabetic characters may be used. Only .txt files may be used. File must exist in same directory the program is in.
+
+File does not exist. Re-enter with a existing file. If no file exists please create one.
+outwioerw.txt
+File does not exist. Re-enter with a existing file. If no file exists please create one.
+.txt
+File does not exist. Re-enter with a existing file. If no file exists please create one.
+out.txt
+Input First Name with length of at most 50 characters and comprised of only upper or lower case alphabetic characters
+
+Input was invalid. You must have between 1 and 50 upper or lower case alphabetic characters for first name
+___----drfsadr
+Input was invalid. You must have between 1 and 50 upper or lower case alphabetic characters for first name
+drew
+Input Last Name with length of at most 50 characters and comprised of only upper or lower case alphabetic characters
+---sdf9klsdjf
+Input was invalid. You must have between 1 and 50 upper or lower case alphabetic characters for last name
+
+Input was invalid. You must have between 1 and 50 upper or lower case alphabetic characters for last name
+bosco
+Please enter the 1st number.
+1902853710957120958
+Input Mismatch Exception. Error message written to output file specified.
+Please enter the 1st number.
+
+123
+Please enter the 2nd number.
+90830489138249138409134
+Input Mismatch Exception. Error message written to output file specified.
+Please enter the 2nd number.
+93938943
+Enter Password, must be at least 1 character in length
+pass
+Reenter Password to validate match.
+pasdddd
+Reenter Password to validate match.
+pass
+Password Valid, have a good day.
+Input the input file name. Only alphabetic characters may be used. Only .txt files may be used. File must exist in same directory the program is in.
+
+File does not exist. Re-enter with a existing file. If no file exists please create one.
+iasodufoaisdf.txt
+File does not exist. Re-enter with a existing file. If no file exists please create one.
+asdof
+File does not exist. Re-enter with a existing file. If no file exists please create one.
+in.txt

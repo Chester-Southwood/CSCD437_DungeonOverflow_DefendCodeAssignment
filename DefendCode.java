@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,7 +12,6 @@ public class DefendCode{
 	private static String lName = "";
 	private static int num1 = 0;
 	private static int num2 = 0;
-	private static String pw = "";
 	private static File inputFile = null;
 	private static final String END = "\r\n";
 	
@@ -25,14 +25,14 @@ public class DefendCode{
 		num2 = readInts(sc, "Please enter the 2nd number.");
 		passWord();
 		inputFile = getInputFile();
-		writeAll(fName, lName, num1, num2, pw, inputFile);
+		writeAll(fName, lName, num1, num2, inputFile);
 	}
 	
 	private static void readName()
 	{
 		Scanner kIn = new Scanner(System.in);
 		
-		System.out.println("Input First Name with length of at most 20 characters and comprised of only upper or lower case alphabetic characters");
+		System.out.println("Input First Name with length of at most 50 characters and comprised of only upper or lower case alphabetic characters");
 		fName = kIn.nextLine();
 		
 		Pattern p = Pattern.compile("^[a-zA-Z]{1,50}$");
@@ -44,18 +44,20 @@ public class DefendCode{
 		{
 			System.out.println("Input was invalid. You must have between 1 and 50 upper or lower case alphabetic characters for first name");
 			fName = kIn.nextLine();
+			m = p.matcher(fName);
 		}
 		
 		System.out.println("Input Last Name with length of at most 50 characters and comprised of only upper or lower case alphabetic characters");
 		lName = kIn.nextLine();
 		
-		p = Pattern.compile("^[a-zA-Z]{1,30}$");
+		p = Pattern.compile("^[a-zA-Z]{1,50}$");
 		m = p.matcher(lName);
 		
 		while(!m.matches())
 		{
 			System.out.println("Input was invalid. You must have between 1 and 50 upper or lower case alphabetic characters for last name");
 			lName = kIn.nextLine();
+			m = p.matcher(lName);
 		}
 		
 	}
@@ -70,7 +72,7 @@ public class DefendCode{
 	 * 
 	 * @return     		  Int value that is in a valid range without overflow/underflow.
 	 */
-	public static int readInts(final Scanner userScanner, final String numMessage)
+	public static int readInts(final Scanner userScanner, final String numMessage) throws Exception
 	{		
 		boolean gotNum   = false;
 		int     numValue = -1;
@@ -85,8 +87,18 @@ public class DefendCode{
 			}
 			catch(NumberFormatException e) //exception thrown if outOfRange or outOfFormat
 			{
-				System.out.println("Incorrect input!");
+				System.out.println("Number Format Exception. Error message written to output file specified.");
 				System.out.println(numMessage);
+				FileWriter fWriter = getWriter();
+				fWriter.append(e.getMessage());
+				fWriter.flush();
+			}
+			catch(InputMismatchException e) //Exception thrown if number is larger or smaller than MAX_INT or MIN_INT
+			{
+				System.out.println("Input Mismatch Exception. Error message written to output file specified.");
+				FileWriter fWriter = getWriter();
+				fWriter.append(e.getMessage());
+				fWriter.flush();
 			}
 			finally
 			{
@@ -160,13 +172,14 @@ public class DefendCode{
 		Pattern pat = Pattern.compile("^\\w+.txt$");
 		Matcher m = pat.matcher(inFile.getPath());
 		
-		while(!inFile.exists() && !m.matches())
+		while(!inFile.exists() || !m.matches())
 		{
 			System.out.println("File does not exist. Re-enter with a existing file. If no file exists please create one.");
 			
 			//Do RegEx to check for valid file path?
 			
 			inFile = new File(kIn.nextLine());
+			m = pat.matcher(inFile.getPath());
 		}
 		
 		return inFile;
@@ -182,13 +195,14 @@ public class DefendCode{
 		Pattern pat = Pattern.compile("^\\w+.txt$");
 		Matcher m = pat.matcher(outFile.getPath());
 		
-		while(!outFile.exists() && !m.matches())
+		while(!outFile.exists() || !m.matches())
 		{
 			System.out.println("File does not exist. Re-enter with a existing file. If no file exists please create one.");
 			
 			//Do RegEx to check for valid file path?
 			
 			outFile = new File(kIn.nextLine());
+			m = pat.matcher(outFile.getPath());
 		}
 		
 		return outFile;
@@ -199,7 +213,7 @@ public class DefendCode{
 		Scanner kIn = new Scanner(System.in);
 		System.out.println("Enter Password, must be at least 1 character in length");
 		
-		pw = kIn.nextLine();
+		String pw = kIn.nextLine();
 		
 		while(!(pw.length() >= 1))
 		{
@@ -285,7 +299,8 @@ public class DefendCode{
 		}
 		else
 		{
-			throw new Exception("Can't add " + num1 + " and " + num2 + " without causing integer overflow.");
+			fileWriter.append("Can't add " + num1 + " and " + num2 + " without causing integer overflow.");
+			fileWriter.flush();
 		}
 	}
 
@@ -300,7 +315,8 @@ public class DefendCode{
 		}
 		else
 		{
-			throw new Exception("Can't multiply " + num1 + " and " + num2 + " without causing integer overflow.");
+			fileWriter.append("Can't multiply " + num1 + " and " + num2 + " without causing integer overflow.");
+			fileWriter.flush();
 		}
 	}
 
@@ -327,12 +343,11 @@ public class DefendCode{
 		}
 	}
 
-	private static void writeAll(String fname, String lname, int num1, int num2, String password, File input) throws Exception
+	private static void writeAll(String fname, String lname, int num1, int num2, File input) throws Exception
 	{
 		writeName(fname, lname);
 		writeSum(num1, num2);
 		writeProduct(num1, num2);
-		writePassword(password);
 		writeContents(input);
 	}
 }
