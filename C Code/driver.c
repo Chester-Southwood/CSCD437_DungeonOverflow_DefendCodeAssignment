@@ -12,6 +12,7 @@ Team Member 3: Chester Southwood
 
 int main()
 {
+    /*
     FILE *fout = NULL;
     FILE *fin = NULL;
     char *finName = (char*) malloc(sizeof(char)*256);
@@ -86,4 +87,5 @@ int main()
 
     printf("\nDone");
     return 1;
+    */
 }
