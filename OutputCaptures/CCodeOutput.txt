@@ -1,0 +1,59 @@
+terminal output:
+
+c code run with valid inputs:
+
+All Files must reside in local directory or sub-directory contained within local.
+Please enter input file name.
+in.txt
+Enter output file
+out.txt
+Please enter your first name: drew
+Please enter your last name: bosco
+Please enter 1st number: 3
+Please enter 2nd number: 2
+Please enter a password: pass
+Please enter it again to validate it: pass
+Passwords match.
+
+c code run with invalid entries:
+
+All Files must reside in local directory or sub-directory contained within local.
+Please enter input file name.
+out.txt
+Enter output file
+out.txt
+ERROR, input and output file cannot be of the same name. Re-enter file names.
+
+All Files must reside in local directory or sub-directory contained within local.
+Please enter input file name.
+innnn.txt
+FILE DOES NOT EXIST. RETRY WITH VALID FILE
+in.txt
+Enter output file
+outttt.txt
+Please enter your first name:
+Name must be at least 1 char in length. Please re-enter name.
+ drew
+Name must be at least 1 char in length. Please re-enter name.
+drew
+Please enter your last name:
+Name must be at least 1 char in length. Please re-enter name.
+ bosco
+Name must be at least 1 char in length. Please re-enter name.
+bosco
+Please enter 1st number: 13981294892
+Please enter 1st number: 832981924891
+Please enter 1st number: -192891284913589
+Please enter 1st number: 123
+Please enter 2nd number: 19843901u309
+Invalid. Please try again.
+Please enter 1st number: lsdf
+Please enter 1st number: 123
+Please enter 2nd number: 1234
+Please enter a password: pass
+Please enter it again to validate it: pls
+Password does not match. Re-enenter matching password.
+pass
+Passwords match.
+
+Done

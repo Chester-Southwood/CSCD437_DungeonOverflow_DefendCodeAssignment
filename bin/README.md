@@ -21,7 +21,7 @@ Team Member 3: Chester Southwood
 
 ## Screenshot - Java
 
-- [Java Code Output Text File](OutputCaptures/JavaCodeOutput.txt)
+![]()
 
 ## Complications we defended against - Java
 
@@ -52,9 +52,9 @@ Team Member 3: Chester Southwood
 3. type the make command to compile the program
 4. Execute main program by entering '.\driver.exe' within the command line.
 
-## Output - C
+## Screenshot - C
 
-- [C Output Text File](./OutputCaptures/CCodeOutput.txt)
+![]()
 
 ## Complications we defended against - C
 
@@ -69,6 +69,8 @@ Team Member 3: Chester Southwood
 ## Shortcomings - C
 
 - Names entered by the user must be at least two characters in length.
+- White space entered by the user are counted as characters, resulting in blank names.
 - User is required to save input file and output file within the source directory, they are unable to specify a outside location due to possible malicious behavior. 
 - Output file will be created automatically if not already located.
-- Decimal values can be entered, but they are promptly converted and tested as integers. No decimal points are kept. They are always rounded down.
+- Decimal values could be entered, they are promptly converted and tested as integers.
+
