@@ -1,13 +1,27 @@
 # Team name - Dungeon Overflow
 
 Team Member 1: Drew Bosco
+Email: abosco@eagles.ewu.edu
 
 Team Member 2: Eric Shervey
+Email: ericbshervey@gmail.com
 
-Team Member 3: Chester Southwood 
+Team Member 3: Chester Southwood
+
+Contact Drew Bosco for any additional clarification needed. He can also provide the email addresses to the other team members.
 
 ------
 
+# OS and GCC
+
+## OS Version
+Linux Ubuntu 18.04.3 LTS
+
+So if you are not using Ubuntu, you could run into issues.
+Do not use Windows or Mac with our code.
+
+## GCC
+GCC 7.4.0
 
 
 # Language: Java
@@ -51,6 +65,23 @@ Team Member 3: Chester Southwood
 2. move to C Code sub-directory within the command line
 3. type the make command to compile the program
 4. Execute main program by entering '.\driver.exe' within the command line.
+
+## Library Dependencies
+We have the following C library dependencies that you will need as well:
+
+```
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <limits.h>
+#include <unistd.h>
+#include <ctype.h>
+#include <math.h>
+#include <regex.h>
+#include <crypt.h>
+#include <sys/random.h>
+#include <math.h>
+```
 
 ## Output - C
 
