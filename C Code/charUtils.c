@@ -43,14 +43,14 @@ FILE* getFile(char *accessType, char *fileName)
     fflush(stdin); //Nope that doesn't fix it either.
     //printf("0.) PATH: %s\n", path);
     //printf("X\n", fileName);
-
-    strncat(path, "\\", 256 - 1);
+    
+    strncat(path, "\\/\\/", 256 - 1);
     //printf("Y\n", fileName);
     strncat(path, fileName, 256 - 1);
     //printf("Z\n", fileName);
     //printf("2.) %s\n", fileName);
 
-    FILE *f = fopen(path, accessType);
+    FILE *f = fopen(fileName, accessType);
 
     if(f == NULL)
     {
