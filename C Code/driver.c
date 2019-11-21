@@ -1,4 +1,5 @@
 #include "defendCode.h"
+#include <regex.h>
 
 /*
  Team name - Dungeon Overflow
@@ -12,21 +13,26 @@ Team Member 3: Chester Southwood
 
 int main()
 {
-    /*
+    
+    
     FILE *fout = NULL;
     FILE *fin = NULL;
     char *finName = (char*) malloc(sizeof(char)*256);
     char *foutName = (char*) malloc(sizeof(char)*256); 
-    char* fname;
-    char* lname;
-    int num1 = 0;
-    int num2 = 0;
+    char* name = NULL;
+    //int num1 = 0;
+    //int num2 = 0;
 
-    double dnum1, dnum2;
-    int overflowFlag = 0;
+    //double dnum1, dnum2;
+    //int overflowFlag = 0;
 
+    while(name == NULL)
+    {
+        name = getName(name);
+    }
+    
     do {
-        printf(" \nAll Files must reside in local directory or sub-directory contained within local.\nPlease enter input file name.\n");
+        printf(" \nfile names must end in .txt, not exceed 255 characters in length, and be in the same directory as program..\nPlease enter input file name.\n");
         fin = getFile("r", finName);
         while(fin == NULL)
         {
@@ -46,13 +52,10 @@ int main()
     }
 
     } while (isSameFile(finName, foutName) == 1);
-
-
-    printf("Please enter your first name: ");
-    fname = getName();
-    printf("Please enter your last name: ");
-    lname = getName();
-
+    
+    
+    
+    /*
     do{
         if(overflowFlag == 1)
         {
@@ -66,20 +69,23 @@ int main()
     num2 = dnum2;
     int sum = num1+num2;
     int product = num1*num2;
+    */
+    
+    makePassword();
 
-    printf("Please enter a password: ");
-    fflush(stdin);
-    validatePassword();
+     while(validatePassword() == 1)
+    {
+       validatePassword();
+    }
 
+    
     //Write to output file
-    writeChar(fout, fname);
-    writeChar(fout, lname);
-    writeInt(fout, &sum);
-    writeInt(fout, &product);
+    writeChar(fout, name);
+    //writeInt(fout, &sum);
+    //writeInt(fout, &product);
     writeContents(fout, fin);
-
-    free(fname);
-    free(lname);
+    
+    free(name);
     free(finName);
     free(foutName);
     fclose(fin);
@@ -87,5 +93,5 @@ int main()
 
     printf("\nDone");
     return 1;
-    */
+    
 }

@@ -27,7 +27,9 @@ extern FILE* getFile(char *accessType, char *fileName);
 
 extern int isSameFile(char *file1Name, char *file2Name);
 
-extern void validatePassword();
+extern int validatePassword();
+
+extern void makePassword();
 
 extern int alternative_fgets(char* buf, int length);
 
