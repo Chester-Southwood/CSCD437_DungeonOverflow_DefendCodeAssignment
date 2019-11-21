@@ -1,10 +1,21 @@
-import java.io.File;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.io.FileWriter;
 import java.io.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+
+/*
+ Team name - Dungeon Overflow
+
+Team Member 1: Drew Bosco
+
+Team Member 2: Eric Shervey
+
+Team Member 3: Chester Southwood 
+*/
 
 /*
  Team name - Dungeon Overflow
@@ -27,15 +38,26 @@ public class DefendCode{
 	
 	public static void main(String[] args) throws Exception
 	{
+		
+
+		
+		
 		createWriter(false);
+		inputFile = getInputFile();
 
 		readName();
 		Scanner sc = new Scanner(System.in);
 		num1 = readInts(sc, "Please enter the 1st number.");
 		num2 = readInts(sc, "Please enter the 2nd number.");
-		passWord();
-		inputFile = getInputFile();
+		getPassword();
+		System.out.println("Please enter a password.");
+		while (!comparePassword())
+		{
+			System.out.println("Invalid. Please enter the password again.");
+		}
+		
 		writeAll(fName, lName, num1, num2, inputFile);
+		
 	}
 	
 	private static void readName()
@@ -218,29 +240,135 @@ public class DefendCode{
 		return outFile;
 	}
 	
-	private static void passWord()
+	private static void getPassword() throws NoSuchAlgorithmException //TODO: Hash, Salt, Stores password
+, IOException
 	{
+		String pwReq = "contains 10 characters, includes at least one upper case character, one lower case, one digit, one punctiation mark and "
+		+ " does not have more than 3 consecutive lower case characters.";
 		Scanner kIn = new Scanner(System.in);
-		System.out.println("Enter Password, must be at least 1 character in length");
+		System.out.println("Enter a password that: " + pwReq);
 		
-		String pw = kIn.nextLine();
+		String testPW = kIn.nextLine();
 		
-		while(!(pw.length() >= 1))
+		Pattern p = Pattern.compile("^(?=.{10,})(?=.*[a-z])(?=.*[A-Z])(?=.*(\"|'|,|\\.|\\!|\\?|\\|\\-|\\:|\\;|<|>|\\{|\\}|\\[|\\]|\\(|\\)/))(?=.*\\d+)(?!.*[a-z]{3}).+");
+		Matcher m = p.matcher(testPW);
+
+		//while(testPW.length() < 8)
+		while(!m.matches())
 		{
-			System.out.println("Password too short, please reenter.");
-			pw = kIn.nextLine();
+			System.out.println("Password was insufficent. Please enter a password that: " + pwReq);
+			testPW = kIn.nextLine();
+			m = p.matcher(testPW);
 		}
 		
-		System.out.println("Reenter Password to validate match.");
-		String pw2 = kIn.nextLine();
+		SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+		byte[] salt = new byte[32];
+	    sr.nextBytes(salt);
 		
-		while(!pw.equals(pw2))
+		String s = "";
+		MessageDigest md = MessageDigest.getInstance("SHA-512");
+		
+		md.update(salt);
+		
+		byte[] test = md.digest(testPW.getBytes());
+		/*
+		for(int ix = 0; ix < test.length; ix++)
 		{
-			System.out.println("Reenter Password to validate match.");
-			pw2 = kIn.nextLine();
+			System.out.print(test[ix] +" ");
+		}s
+		*/
+		
+        for(int ix = 0; ix < test.length; ix++)
+        {
+        	
+        	//System.out.print(Integer.toString((test[ix] & 0xff) + 0x100, 16) + " -> ");
+            s += Integer.toString((test[ix] & 0xff) + 0x100, 16).substring(1);
+            //System.out.println(s);
+        }
+		
+        File pFile = new File("pwFile.txt");
+        
+        if (!pFile.exists())
+        {
+        	pFile.createNewFile();
+        }
+        
+		FileWriter fw = new FileWriter(pFile);
+			
+		fw.append("Hash:" + s + "\r\n");
+		fw.append("Salt:");
+			
+		for(int ix = 0; ix < salt.length; ix++)
+		{
+			fw.append(Integer.toString(salt[ix]) + " ");
+		}
+			
+		fw.flush();
+			
+		//System.out.println("HIT");
+		fw.close();
+			
+
+    
+	}
+	
+	private static boolean comparePassword() throws IOException, NoSuchAlgorithmException
+	{
+		File pFile = new File("pwFile.txt");
+		
+		if(!pFile.exists())
+		{
+			pFile.createNewFile();
 		}
 		
-		System.out.println("Password Valid, have a good day.");
+		Scanner pwIn = new Scanner(pFile);
+    	
+    	String cHash = pwIn.nextLine().substring(5);
+    	byte[] cSalt = new byte[32];
+    		
+    	String saltString = pwIn.nextLine().substring(5);
+    		
+    	Scanner scn = new Scanner(saltString);
+    	//System.out.println(saltString);
+    	for(int ix = 0; ix < cSalt.length; ix++)
+    	{
+    		cSalt[ix] = Byte.parseByte(scn.next());
+    	}
+    	
+    	scn.close();
+    	
+    	Scanner kIn = new Scanner(System.in);
+        String p2 = kIn.nextLine();
+		String s2 = "";
+        MessageDigest md2 = MessageDigest.getInstance("SHA-512");
+		
+        md2.update(cSalt);
+        byte[] test2 = md2.digest(p2.getBytes());
+
+        for(int ix = 0; ix < test2.length; ix++)
+        {
+        	
+        	//System.out.print(Integer.toString((test[ix] & 0xff) + 0x100, 16) + " -> ");
+            s2 += Integer.toString((test2[ix] & 0xff) + 0x100, 16).substring(1);
+            //System.out.println(s);
+        }
+		
+        /*
+        System.out.println(s2);
+        System.out.println(s);
+        System.out.println(cHash);
+        */
+        
+        if(s2.compareTo(cHash) == 0)
+        {
+        	return true;
+        }
+        else
+        {
+        	return false;
+        }
+ 
+ 
 	}
 
 	private static void createWriter(File file) throws Exception

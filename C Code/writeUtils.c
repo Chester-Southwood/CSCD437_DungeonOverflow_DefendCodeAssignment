@@ -21,6 +21,7 @@ void writeChar(FILE *out, char *arr)
     size_t i = 0;
     for(i = 0; i < strlen(arr); i++)
     {
+        //printf("%c", arr[i]);
         fputc(arr[i], out);
     }
     //fputc('\n', out);
