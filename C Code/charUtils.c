@@ -188,7 +188,7 @@ void makePassword()
     }
     
     char *pass = crypt(uIn, salt);
-    printf("P1:%s\n", pass);
+    //printf("P1:%s\n", pass);
     
     FILE *fOut = fopen("password.txt", "w+");
     
