@@ -24,7 +24,7 @@ void writeChar(FILE *out, char *arr)
         //printf("%c", arr[i]);
         fputc(arr[i], out);
     }
-    //fputc('\n', out);
+    fputc('\n', out);
 }
 
 void writeInt(FILE *out, int *num)

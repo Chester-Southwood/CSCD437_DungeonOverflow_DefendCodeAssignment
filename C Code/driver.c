@@ -20,11 +20,11 @@ int main()
     char *finName = (char*) malloc(sizeof(char)*256);
     char *foutName = (char*) malloc(sizeof(char)*256); 
     char* name = NULL;
-    //int num1 = 0;
-    //int num2 = 0;
+    int num1 = 0;
+    int num2 = 0;
 
-    //double dnum1, dnum2;
-    //int overflowFlag = 0;
+    double dnum1, dnum2;
+    int overflowFlag = 0;
 
     while(name == NULL)
     {
@@ -53,9 +53,9 @@ int main()
 
     } while (isSameFile(finName, foutName) == 1);
     
+    printf("You will be asked to give two integer values. If the sum or product of the two integers would result in a "
+            "over or underflow, you will be asked to re-enter with values that do not result in a over or underflow.\n");
     
-    
-    /*
     do{
         if(overflowFlag == 1)
         {
@@ -69,20 +69,21 @@ int main()
     num2 = dnum2;
     int sum = num1+num2;
     int product = num1*num2;
-    */
     
     makePassword();
 
      while(validatePassword() == 1)
     {
+       printf("Password did not match.\n");
        validatePassword();
     }
 
+    printf("Password matched!\n");
     
     //Write to output file
     writeChar(fout, name);
-    //writeInt(fout, &sum);
-    //writeInt(fout, &product);
+    writeInt(fout, &sum);
+    writeInt(fout, &product);
     writeContents(fout, fin);
     
     free(name);
